@@ -48,7 +48,7 @@ pip install -r requirements.txt
 ### 4. 실행
 
 ```bash
-python "ARIES(Analog & RF Insight and Equation Summarizer).py"
+python "ARIES.py"
 ```
 
 GUI가 실행되면, API 키를 입력하고 논문 PDF가 모인 폴더를 선택한 뒤 **⚡ 요약 시작**을 클릭하세요.
