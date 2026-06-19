@@ -1,55 +1,53 @@
 # 📄 ARIES: Analog & RF Insight and Equation Summarizer
 
-> **AI-Driven Information Extraction Pipeline Tailored for IC Design Engineers & Researchers**
+> **대학원 회로 설계실에서 레퍼런스 논문 파헤치다가 화가나서 직접 만든 정보 추출 툴**
 
-ARIES는 Analog/RF 회로 설계자가 선행 연구 및 레퍼런스 논문을 분석할 때 소요되는 반복적이고 비효율적인 리딩 사이클을 혁신하기 위해 개발된 **지능형 정보 구조화 도구**입니다. 대량의 논문 PDF로부터 설계 핵심 수식, 변수 정의, 공정 제약 조건, 그리고 실전 디펜스 가이드라인까지 추출하여 시각적인 대시보드로 자동 빌드합니다.
-
----
-
-## 💡 Motivation & Problem Statement
-
-* **수식 전제 조건의 파편화:** Analog/RF 회로 설계(예: PLL, RF Front-end 등) 시, 여러 레퍼런스 논문에서 유사한 형태의 수식이 사용되더라도 적용된 CMOS 공정 노드, 동작 영역(Sub-threshold / Saturation), 입력 파워 레벨 등의 **전제 조건과 가정이 상이**합니다.
-* **검증 리소스의 과다 소모:** 수식의 수학적 이해보다 해당 식의 유효 범위를 원문에서 일일이 찾아내고 비교 검증하는 과정에서 극심한 시간 왜곡과 병목이 발생했습니다.
-* **해결책:** 본 엔지니어는 이 문제를 해결하고자 **LLM 구조화 파이프라인과 정밀 정제 엔진**을 결합하여, 설계자가 오직 "회로적 타당성 판단과 스펙 최적화"에만 집중할 수 있도록 돕는 ARIES를 개발했습니다.
+ARIES는 Analog/RF 회로 설계할 때 널려 있는 레퍼런스 논문들을 일일이 읽고, 수식 전제 조건 비교하느라 버려지는 아까운 리딩 시간을 줄이려고 만든 **실전형 데이터 구조화 툴**입니다. 논문 PDF만 던져 넣으면 핵심 설계 수식, 변수 정의, 공정 제약 조건, 면접용 디펜스 포인트까지 싹 뽑아서 깔끔한 HTML 대시보드로 묶어줍니다.
 
 ---
 
-## ✨ Key Features
+## 💡 개발 배경 (Motivation)
 
-* **LLM-Based Structural Parsing:** `Gemini-2.5-flash` 모델과 `Pydantic BaseModel`을 결합하여, 단순 텍스트 요약을 넘어 설계자가 지정한 정밀 스키마 규격으로 데이터를 강제 추출합니다.
-* **Robust LaTeX Cleansing Engine (트러블슈팅 반영):** LLM이 수식을 분수 슬래시(`/`) 등으로 모호하게 출력하거나 기생 성분 기호가 깨지는 현상을 방지하기 위해, 내부 괄호 Depth 체크 및 정규식을 활용한 **`\frac` 포맷 복원 및 회로 변수 아래첨자(`V_{DD}`, `g_m`, `C_L`) 하드코딩 교정 엔진**을 탑재했습니다.
-* **Deterministic File Caching:** 다중 파일 처리 시 중복 연산과 API 비용 낭비를 방지하기 위해 로컬 JSON 검증 디바이스 기반의 지능형 패스(Skip) 기능을 지원합니다.
-* **Dual-View Dashboard Generation:**
-  * **개별 논문 리포트:** MathJax 렌더링이 내장된 HTML 대시보드를 생성하여 핵심 수식, 물리적 직관, 실전 면접/디펜스 치트키 가이드를 시각화합니다.
-  * **통합 비교 분석 매트릭스:** 폴더 내 모든 선행 연구들의 핵심 스펙과 대표 수식을 한눈에 교차 검증할 수 있는 통합 대시보드를 자동 빌드합니다.
-* **Concurrency Path Stability:** 멀티스레딩 GUI 환경에서 파일 경로가 인버전되는 문제를 방지하기 위해 전역 디렉토리 제어 대신 **절대 경로 파싱 아키텍처**를 채택하여 구동 안정성을 극대화했습니다.
+* **논문마다 제각각인 전제 조건:** 각종 프로젝트에서 설계할 때 논문들을 비교해 보면, 똑같이 생긴 수식인데도 공정 노드(28nm/55nm 등)나 bias 영역, 입력 파워 레벨 같은 전제 조건이 조금씩 다릅니다.
+* **시간 낭비의 주범:** 수식 자체를 이해하는 것보다 "이 식이 대체 어떤 마진과 조건에서 성립하는가?"를 본문 속에서 일일이 찾아 비교하는 게 진짜 노가다였고, 시간도 제일 많이 뺏겼습니다.
+* **해결책:** "귀찮은 반복 작업은 툴한테 맡기고, 엔지니어는 회로적 타당성 판단이랑 시뮬레이션 튜닝에만 집중하자"는 생각으로 퇴근길에 짬짬이 빌드했습니다.
 
 ---
 
-## 🛠️ Tech Stack
+## 🔥 핵심 기능 (Features) & 트러블슈팅 기록
 
-* **Language:** Python 3.10+
-* **Framework & GUI:** Tkinter, TTK Style Environment
-* **AI & Parser Engine:** Google GenAI SDK (Gemini-2.5-flash), Pydantic v2
-* **PDF Scraper:** PyPDF (Physical Buffer Sync Scan)
-* **Frontend Rendering:** HTML5, CSS3, MathJax v3 (Dynamic Math Typeface)
-
----
-
-## 📊 System Architecture & Data Flow
-
-1. **PDF Text Stream Scanner:** `PyPDF` 버퍼 스캔을 통한 대용량 논문 원문 데이터 확보
-2. **Strict Schema injection:** 시니어 IC 디자이너 관점의 프롬프트 인스트럭션 및 Pydantic 스키마 주입
-3. **Regex Sub-Lexer Filter:** 수식 깨짐 방지를 위한 백슬래시 이스케이프 및 LaTeX 세척 세러피 가동
-4. **HTML Dashboard Compiler:** 개별 및 통합 비교 분석 매트릭스 렌더링 및 파일 I/O 영속화
+* **Pydantic 스키마 기반 정밀 파싱:** `Gemini-2.5-flash` API에 Pydantic 스키마를 강제 주입해서, AI가 헛소리(할루시네이션) 하거나 대충 요약하지 못하도록 원하는 규격으로만 데이터가 튀어나오게 묶었습니다.
+* **LaTeX 수식 깨짐 방지 엔진 (가장 삽질한 부분):** AI가 분수를 슬래시(`/`)로 뱉거나 기생 소자 기호(`V_DD`, `g_m`, `C_L`) 언더바를 빼먹어서 렌더링이 깨지는 문제가 있었습니다. 괄호 깊이(Depth) 체크랑 정규식 필터를 직접 짜 넣어서, 무조건 깔끔한 `\frac` 포맷이랑 아래첨자로 자동 변환되게 수식 세척 기능을 구현했습니다.
+* **멀티스레딩 절대 경로 디버깅:** 여러 논문을 한 번에 일괄 처리(Batch)할 때 GUI 스레드 상에서 파일 경로가 인버전되거나 꼬여서 엉뚱한 폴더에 저장되는 버그가 있었습니다. 전역 디렉토리 제어하는 편법 대신 아예 절대 경로 파싱 아키텍처로 뜯어고쳐서 구동 안정성을 잡았습니다.
+* **지능형 로컬 캐싱:** 똑같은 논문 또 돌려서 API 비용 날리는 짓을 막으려고, 폴더 내에 이미 파싱된 `_analysis.json` 파일이 있으면 알아서 Skip하고 넘어가는 고속 패스 기능을 넣었습니다.
+* **두 가지 맛 대시보드 빌드:** 
+  * **개별 리포트:** MathJax 렌더링을 내장해 수식이 예쁘게 표현되는 HTML 페이지 (물리적 직관, 심층 디펜스 가이드 포함).
+  * **통합 비교 분석표:** 폴더 내 모든 논문의 타깃 스펙이랑 핵심 수식만 한눈에 가로로 쫙 비교할 수 있는 마스터 대시보드를 생성합니다.
 
 ---
 
-## 🚀 How It Works (Example)
+## 🛠️ 사용 기술 (Tech Stack)
 
-### Input Area
+* **언어:** Python 3.10+
+* **UI 부문:** Tkinter, TTK 스타일 위젯
+* **AI & 파서:** 구글 GenAI SDK (`gemini-2.5-flash`), Pydantic v2
+* **PDF 처리:** PyPDF (물리 버퍼 스캔 방식)
+* **프론트엔드:** HTML5, CSS3, MathJax v3 (수식 폰트 렌더링용)
+
+---
+
+## 🚀 실제 돌아가는 구조 (Example)
+
+### 논문 폴더 상태 (Input)
 ```text
-your_research_folder/
+my_circuit_papers/
 ├── ISSCC_2024_PLL.pdf
 ├── JSSC_2023_RF_Frontend.pdf
-└── [ARIES GUI Application Executed]
+└── [여기서 ARIES 프로그램 켜고 폴더 선택 후 시작 클릭]
+
+my_circuit_papers/
+├── ISSCC_2024_PLL_analysis.json  <-- 중복 연산 방지용 캐시
+├── ISSCC_2024_PLL_dashboard.html <-- 수식 정리된 개별 리포트
+├── JSSC_2023_RF_Frontend_analysis.json
+├── JSSC_2023_RF_Frontend_dashboard.html
+└── __통합_비교_분석표_대시보드.html          <-- 🏆 이 프로젝트의 하이라이트 (선행연구 비교표)
