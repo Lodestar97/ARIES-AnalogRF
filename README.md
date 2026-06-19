@@ -1,4 +1,4 @@
-<img width="1031" height="731" alt="image" src="https://github.com/user-attachments/assets/cd6fbf1d-7635-4196-ab8c-bcf29a6b5c35" /># 📄 ARIES: Analog & RF Insight and Equation Summarizer
+📄 ARIES: Analog & RF Insight and Equation Summarizer
 
 > **대학원 회로 설계실에서 레퍼런스 논문 파헤치다가 화가나서 직접 만든 정보 추출 툴**
 
@@ -37,43 +37,38 @@ ARIES는 Analog/RF 회로 설계할 때 널려 있는 레퍼런스 논문들을 
 ---
 
 ## 🚀 실제 돌아가는 구조 (Example)
-<!-- 1. 초기 화면 -->
-<p align="center">
-  <img src=<img width="1029" height="730" alt="image" src="https://github.com/user-attachments/assets/5f5da0a9-28ee-4b2f-8871-7d68d6dacc2f" />
- alt="ARIES 초기 화면" width="80%">
-  <br>
-  <em>📷 [초기 화면] 깔끔한 GUI 레이아웃 및 Gemini API 연동 세팅</em>
-</p>
+<div align="center">
 
+<!-- 1. 초기 화면 -->
+<img width="1032" height="729" alt="image" src="https://github.com/user-attachments/assets/f2491e19-93c2-4026-9f76-d0744f474873" />
 <br>
+<em>📷 [초기 화면] 깔끔한 GUI 레이아웃 및 Gemini API 연동 세팅</em>
+
+<br><br>
 
 <!-- 2. 폴더 설정 -->
-<p align="center">
-  <img src=<img width="1027" height="727" alt="image" src="https://github.com/user-attachments/assets/d339a31f-37b1-4f9a-93c9-69a6c7f9063d" />
- alt="폴더 설정" width="80%">
-  <br>
-  <em>📂 [폴더 설정] 논문 PDF가 모여있는 대상 디렉토리 지정 및 캐시 무결성 검증</em>
-</p>
-
+<img width="1032" height="730" alt="image" src="https://github.com/user-attachments/assets/0670be44-4b74-4d46-91f9-71df704f25b4" />
 <br>
+<em>📂 [폴더 설정] 논문 PDF가 모여있는 대상 디렉토리 지정 및 캐시 무결성 검증</em>
+
+<br><br>
 
 <!-- 3. 구동 화면 -->
-<p align="center">
-  <img src=<img width="1031" height="731" alt="image" src="https://github.com/user-attachments/assets/311e3ed5-e648-4447-a4fe-e776ffcf6296" />
- alt="ARIES 구동 화면" width="80%">
-  <br>
-  <em>⚡ [구동 화면] 멀티스레딩 기반 실시간 텍스트 스캔 및 Gemini AI 구조화 파이프라인 가동</em>
-</p>
-
+<img width="1029" height="730" alt="image" src="https://github.com/user-attachments/assets/821c476e-b500-422f-84be-6bfbc8a7b8e5" />
 <br>
+<em>⚡ [구동 화면] 멀티스레딩 기반 실시간 텍스트 스캔 및 Gemini AI 구조화 파이프라인 가동</em>
+
+<br><br>
 
 <!-- 4. 결과 화면 -->
-<p align="center">
-  <img src=<img width="919" height="935" alt="image" src="https://github.com/user-attachments/assets/7af150a7-6051-4c76-95c1-9cf5813447ec" />
- alt="HTML 대시보드 결과" width="80%">
-  <br>
-  <em>🏆 [결과 화면] MathJax 수식 렌더링 및 면접 디펜스 가이드가 포함된 통합 HTML 대시보드 빌드 완료</em>
-</p>
+<img width="885" height="916" alt="image" src="https://github.com/user-attachments/assets/bc6006cd-c6ba-439f-8e67-af9959363a81" />
+<img width="896" height="892" alt="image" src="https://github.com/user-attachments/assets/6b9d60d7-9a21-4274-9a9f-4a6bce11ab93" />
+<img width="1031" height="730" alt="image" src="https://github.com/user-attachments/assets/9f8b6b05-56b5-4143-8534-f42c672712bf" />
+<img width="1864" height="826" alt="image" src="https://github.com/user-attachments/assets/49a4b4f0-daef-423e-a248-c8d455efd1ae" />
+<br>
+<em>🏆 [결과 화면] MathJax 수식 렌더링 및 면접 디펜스 가이드가 포함된 통합 HTML 대시보드 빌드 완료</em>
+
+</div>
 
 
 ### 논문 폴더 상태 (Input)
